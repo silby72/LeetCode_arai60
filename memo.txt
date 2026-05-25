@@ -1,0 +1,18 @@
+追いつかなくてはならないのでfasterとslowerは別基準
+
+別解：HashSetを使う
+pythonclass Solution:
+    def hasCycle(self, head):
+        seen = set()
+
+        current = head
+        while current is not None:
+            if current in seen:
+                return True       # 同じノードを2回見た → サイクルあり
+            seen.add(current)
+            current = current.next
+
+        return False
+訪問済みのノードをSetに保存して、同じノードが2回出てきたらサイクルありと判断
+
+2ポインターHashSet時間計算量O(n)O(n)空間計算量O(1)O(n)
