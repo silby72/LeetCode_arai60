@@ -1,18 +1,13 @@
-追いつかなくてはならないのでfasterとslowerは別基準
+まず問題文を理解するのに苦戦する。posとは。
+position（位置）の略らしい。
 
-別解：HashSetを使う
-pythonclass Solution:
-    def hasCycle(self, head):
-        seen = set()
+前回はhas_Cycleかどうかを判別する仕組みを作るだけだったが今回はノードのインデックスを返す必要がある。
+前に作ったものにその機能を足すだけでいいだろうか
 
-        current = head
-        while current is not None:
-            if current in seen:
-                return True       # 同じノードを2回見た → サイクルあり
-            seen.add(current)
-            current = current.next
+出会った位置がわかるならあとは方程式を立てれば解ける？whileが回された回数をnとするとslowerはlist(n-1),fasterはlist{2(n-1)}の位置にいる。
+そこからlistが直線だった場合のindexを引けば特定できるか？と思ったけどループになったら破綻するので棄却。
 
-        return False
-訪問済みのノードをSetに保存して、同じノードが2回出てきたらサイクルありと判断
+headから進んだ歩数と出会い地点からサイクル開始地点までの残り歩数が等しいということに気づく。
+片方のポインタをheadに戻して一つずつ進める。
 
-2ポインターHashSet時間計算量O(n)O(n)空間計算量O(1)O(n)
+leetCodeの使用がよくわからない。
