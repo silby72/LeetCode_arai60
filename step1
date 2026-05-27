@@ -1,28 +1,16 @@
 # Definition for singly-linked list.
 # class ListNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution(object):
-    def detectCycle(self, head):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-        """
+    def deleteDuplicates(self, head):
+        pointer = head
 
-        faster = head
-        slower = head
+        while pointer is not None and pointer.next is not None:
+            if pointer.val == pointer.next.val:
+                pointer.next = pointer.next.next
+            else:
+                pointer = pointer.next
 
-        while faster is not None and faster.next is not None:
-            slower = slower.next
-            faster = faster.next.next
-
-            if slower == faster:
-                pointer = head
-                while pointer != slower:
-                    pointer = pointer.next
-                    slower = slower.next
-                return slower
-
-        return None
+        return head
