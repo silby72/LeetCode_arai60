@@ -12,7 +12,7 @@ class Solution:
             slower = slower.next
             faster = faster.next.next
 
-            if faster == slower :
+            if faster == slower:
                 return True
 
         return False

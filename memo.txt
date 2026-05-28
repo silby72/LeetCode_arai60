@@ -1,18 +1,29 @@
 追いつかなくてはならないのでfasterとslowerは別基準
 
 別解：HashSetを使う
-pythonclass Solution:
+
+```python
+class Solution:
     def hasCycle(self, head):
         seen = set()
 
-        current = head
-        while current is not None:
-            if current in seen:
+        node = head
+        while node is not None:
+            if node in seen:
                 return True       # 同じノードを2回見た → サイクルあり
-            seen.add(current)
-            current = current.next
+            seen.add(node)
+            node = node.next
 
         return False
+```
+
 訪問済みのノードをSetに保存して、同じノードが2回出てきたらサイクルありと判断
 
 2ポインターHashSet時間計算量O(n)O(n)空間計算量O(1)O(n)
+
+is と == の挙動の違い:
+    Pythonにおいて、==演算子は2つのオブジェクトの値が等価（同値）かを比較・判定し、
+    is演算子は2つのオブジェクトが同一かを比較・判定する。
+    オブジェクトの同一性の判定には、オブジェクトの識別値を返す組み込み関数id()が使われる。
+    整数intや文字列strなどのイミュータブル（変更不可）な型のオブジェクトに対するisやis notでの比較は注意
+    ==演算子はオーバーロード可能、is演算子は不可
