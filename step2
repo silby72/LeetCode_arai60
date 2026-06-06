@@ -1,0 +1,25 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        if not isinstance(s, str):
+            raise TypeError(f"Error: {type(s)}")
+        
+        valid_chars = set("()[]{}")
+        for char in s:
+            if char not in valid_chars:
+                raise ValueError(f"Error: {char}")
+
+        stack = []
+        mapping = {")": "(", "}": "{", "]": "["}
+
+        for i in range(len(s)):
+            if s[i] in mapping:
+                if len(stack) > 0:
+                    top = stack.pop()
+                else:
+                    top = None
+                if top != mapping[s[i]]:
+                    return False
+            else:
+                stack.append(s[i])
+
+        return len(stack) == 0

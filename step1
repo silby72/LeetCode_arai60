@@ -1,0 +1,18 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        
+        stack = []
+        mapping = {")": "(", "}": "{", "]": "["}
+
+        for i in range (len(s)):
+            if s[i] in mapping:
+                if len(stack) > 0:
+                    top = stack.pop()
+                else:
+                    top = None
+                if top != mapping[s[i]]:
+                        return False
+            else:
+                stack.append(s[i])
+            
+        return True
