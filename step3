@@ -1,6 +1,5 @@
 class Solution:
-    def isValid(s: str) -> bool:
-
+    def isValid(self, s: str) -> bool:
         if not isinstance(s, str):
             raise TypeError(f"Error: {type(s)}")
         
@@ -11,9 +10,10 @@ class Solution:
             if char in open_to_close:
                 open_brackets.append(char)
             else:
-                top_element = open_brackets.pop() if open_brackets else '#'
+                top_element = open_brackets.pop() if open_brackets else None
+                expected_closed_bracket = open_to_close.get(top_element)
                 
-                if open_to_close.get(top_element) != char:
+                if not expected_closed_bracket or expected_closed_bracket != char:
                     return False
 
-        return len(open_brackets) == 0
+        return not open_brackets
