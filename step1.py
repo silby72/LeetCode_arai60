@@ -1,25 +1,20 @@
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
-class Solution:
-    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+import heapq
 
-        stack = []
-        dummy = ListNode(0)
-        pointer = head
-        second_pointer = dummy
+class KthLargest:
+    def __init__(self, k: int, nums: List[int]):
+        self.k = k
+        self.sorted_list = []
+        heapq.heapify(nums)
+        for val in nums:
+            heapq.heappush(self.sorted_list, val)
 
-        if pointer == None:
-            return None
+    def add(self, val: int) -> int:
+        heapq.heappush(self.sorted_list, val)
+        while len(self.sorted_list) > self.k:
+            heapq.heappop(self.sorted_list)
+        return self.sorted_list[0]
 
-        while pointer is not None:
-            stack.append(pointer.val)
-            pointer = pointer.next
 
-        for i in range(len(stack)):
-            second_pointer.next = ListNode(stack.pop())
-            second_pointer = second_pointer.next
-
-        return dummy.next
+# Your KthLargest object will be instantiated and called as such:
+# obj = KthLargest(k, nums)
+# param_1 = obj.add(val)
